@@ -25,10 +25,13 @@ $apps = @(
     #"Microsoft.OneConnect"
     "Microsoft.People"
     "Microsoft.SkypeApp"
-    #"Microsoft.Windows.Photos"
+    "Microsoft.Wallet"
+    "Microsoft.Microsoft3DViewer"
+    "Microsoft.Windows.Photos"
     "Microsoft.WindowsAlarms"
     #"Microsoft.WindowsCalculator"
     "Microsoft.WindowsCamera"
+    "Microsoft.YourPhone"
     "Microsoft.WindowsMaps"
     "Microsoft.WindowsPhone"
     "Microsoft.WindowsSoundRecorder"
@@ -83,9 +86,9 @@ $apps = @(
 foreach ($app in $apps) {
     echo "Trying to remove $app"
 
-    Get-AppxPackage -Name $app -AllUsers | Remove-AppxPackage
+    Get-AppxPackage -Name $app -AllUsers | Remove-AppxPackage -Verbose
 
     Get-AppXProvisionedPackage -Online |
         where DisplayName -EQ $app |
-        Remove-AppxProvisionedPackage -Online
+        Remove-AppxProvisionedPackage -Online -Verbose
 }
